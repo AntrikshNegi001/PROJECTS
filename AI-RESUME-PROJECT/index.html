@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Hub | Professional Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c7c7c7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 min-h-screen text-slate-800">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-700">ResumeHub</span>
+            </div>
+            <span class="text-xs font-semibold bg-green-100 text-green-700 px-3 py-1 rounded-full border border-green-200">
+                ● System Online
+            </span>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-10 max-w-5xl">
+
+        <div id="home-page" class="animate-fade-in-up">
+            <header class="text-center mb-12 mt-8">
+                <h1 class="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+                    Elevate Your Career with <span class="text-blue-600">AI</span>
+                </h1>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    Optimize your existing resume or build a new one from scratch using our advanced Gemini Pro engine.
+                </p>
+            </header>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group" onclick="showPage('ranker-page')">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
+                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-3 group-hover:text-blue-600">Rank My Resume</h2>
+                    <p class="text-slate-500">Analyze your resume against a job description. Get a score out of 100 and actionable feedback.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group" onclick="showPage('generator-page')">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors">
+                        <svg class="w-7 h-7 text-green-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-3 group-hover:text-green-600">Generate Resume</h2>
+                    <p class="text-slate-500">Fill in your details and let AI write and format a professional resume for you instantly.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="ranker-page" class="hidden animate-fade-in">
+            <button onclick="showPage('home-page')" class="mb-6 text-slate-500 hover:text-blue-600 flex items-center font-medium transition-colors">
+                &larr; Back to Dashboard
+            </button>
+            
+            <div class="glass-card p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-blue-600">
+                <h2 class="text-3xl font-bold mb-8 text-slate-800">Resume Ranker</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Target Job Title</label>
+                        <input type="text" id="rank-job-title" placeholder="e.g. Senior Software Engineer" class="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm">
+                    </div>
+
+                    <div class="p-6 border-2 border-dashed border-blue-200 rounded-xl bg-blue-50/50 hover:bg-blue-50 transition-colors text-center">
+                        <label class="cursor-pointer block">
+                            <span class="block text-sm font-semibold text-blue-600 mb-1">Upload .txt File</span>
+                            <span class="block text-xs text-slate-400">or paste text below</span>
+                            <input type="file" id="file-uploader" accept=".txt" class="hidden">
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Resume Content</label>
+                        <textarea id="rank-resume-text" rows="10" placeholder="Paste your resume text here..." class="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm font-mono text-sm"></textarea>
+                    </div>
+
+                    <button onclick="handleRankResume()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold hover:shadow-lg hover:scale-[1.01] transition-all duration-200">
+                        Rank My Resume
+                    </button>
+                </div>
+
+                <div id="rank-loader" class="text-center py-10 hidden">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-100 border-t-blue-600 mb-4"></div>
+                    <p class="text-slate-600 font-medium animate-pulse">AI is analyzing your profile...</p>
+                </div>
+
+                <div id="rank-results" class="mt-8 border-t border-slate-100 pt-8 text-slate-700 whitespace-pre-wrap leading-relaxed bg-slate-50 p-6 rounded-xl hidden"></div>
+            </div>
+        </div>
+
+        <div id="generator-page" class="hidden animate-fade-in">
+            <button onclick="showPage('home-page')" class="mb-6 text-slate-500 hover:text-green-600 flex items-center font-medium transition-colors">
+                &larr; Back to Dashboard
+            </button>
+
+            <div class="glass-card p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-green-600">
+                <h2 class="text-3xl font-bold mb-8 text-slate-800">Resume Generator</h2>
+
+                <form id="generator-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Full Name</label>
+                            <input type="text" id="gen-name" class="gen-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Email</label>
+                            <input type="email" id="gen-email" class="gen-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Phone</label>
+                            <input type="tel" id="gen-phone" class="gen-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">LinkedIn URL</label>
+                            <input type="text" id="gen-linkedin" class="gen-input">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Target Job Role</label>
+                        <input type="text" id="gen-target-role" class="gen-input" placeholder="e.g. Product Manager">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Experience</label>
+                        <textarea id="gen-experience" rows="4" class="gen-input" placeholder="• Job Title at Company (Dates)&#10;• Key achievement..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Education</label>
+                        <textarea id="gen-education" rows="2" class="gen-input" placeholder="Degree, University, Year"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Skills</label>
+                        <textarea id="gen-skills" rows="2" class="gen-input" placeholder="Python, Java, Team Leadership..."></textarea>
+                    </div>
+
+                    <button type="button" onclick="handleGenerateResume()" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-4 rounded-xl font-bold hover:shadow-lg hover:scale-[1.01] transition-all duration-200">
+                        Generate Professional Resume
+                    </button>
+                </form>
+
+                <div id="gen-loader" class="text-center py-10 hidden">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-green-100 border-t-green-600 mb-4"></div>
+                    <p class="text-slate-600 font-medium animate-pulse">Building your resume structure...</p>
+                </div>
+
+                <div id="generator-results" class="mt-8 pt-6">
+                    <button id="download-pdf-btn" onclick="handleDownload()" class="hidden w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 mb-6 shadow-md transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download PDF
+                    </button>
+                    <div id="resume-output" class="border border-slate-200 p-10 rounded-xl bg-white min-h-[500px] shadow-inner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.gen-input').forEach(el => {
+            el.className = "w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all shadow-sm";
+        });
+
+        // --- Navigation ---
+        function showPage(pageId) {
+            ['home-page', 'ranker-page', 'generator-page'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 💾 AUTO-SAVE Logic ---
+        window.addEventListener('load', () => {
+            const savedData = JSON.parse(localStorage.getItem('resumeData'));
+            if (savedData) {
+                const ids = ['gen-name', 'gen-email', 'gen-phone', 'gen-linkedin', 'gen-target-role', 'gen-experience', 'gen-education', 'gen-skills'];
+                ids.forEach(id => {
+                    const key = id.replace('gen-', '');
+                    if(savedData[key]) document.getElementById(id).value = savedData[key];
+                });
+            }
+        });
+
+        const inputs = document.querySelectorAll('#generator-form input, #generator-form textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                const data = {};
+                inputs.forEach(i => data[i.id.replace('gen-', '')] = i.value);
+                localStorage.setItem('resumeData', JSON.stringify(data));
+            });
+        });
+
+        // --- ⌨️ Enter Key Support ---
+        document.getElementById('rank-job-title').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleRankResume();
+        });
+
+        // --- File Upload ---
+        document.getElementById('file-uploader').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type === "text/plain") {
+                const reader = new FileReader();
+                reader.onload = (e) => document.getElementById('rank-resume-text').value = e.target.result;
+                reader.readAsText(file);
+            }
+        });
+
+        // --- Rank Logic ---
+        async function handleRankResume() {
+            const jobTitle = document.getElementById('rank-job-title').value;
+            const resumeText = document.getElementById('rank-resume-text').value;
+            if (!jobTitle || !resumeText) return alert('Please fill all fields');
+
+            const loader = document.getElementById('rank-loader');
+            const loaderText = loader.querySelector('p');
+            const results = document.getElementById('rank-results');
+            
+            loader.classList.remove('hidden');
+            results.classList.add('hidden');
+            results.innerText = "";
+
+            // Animation Steps
+            const steps = ["Scanning Resume...", "Matching Keywords...", "Checking Formatting...", "Finalizing Score..."];
+            let stepIndex = 0;
+            const interval = setInterval(() => {
+                if(stepIndex < steps.length) loaderText.innerText = steps[stepIndex++];
+            }, 800);
+
+            const prompt = `Act as a strict ATS & Recruiter. Target Role: ${jobTitle}. Analyze resume. 
+            Output format: 
+            🎯 SCORE: [0-100]
+            ✅ GOOD MATCHES: [List]
+            ⚠️ MISSING KEYWORDS: [List]
+            💡 IMPROVEMENTS: [List]
+            Resume: ${resumeText}`;
+
+            try {
+                const aiResponse = await callBackendAPI(prompt);
+                clearInterval(interval);
+                results.innerText = aiResponse;
+                results.classList.remove('hidden');
+            } catch (error) {
+                clearInterval(interval);
+                alert("Error: " + error.message);
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // --- Generate Logic ---
+        async function handleGenerateResume() {
+            const data = {};
+            document.querySelectorAll('#generator-form input, #generator-form textarea').forEach(i => data[i.id.replace('gen-', '')] = i.value);
+
+            if (!data.name || !data.experience) return alert('Name and Experience required');
+
+            document.getElementById('gen-loader').classList.remove('hidden');
+            document.getElementById('resume-output').innerHTML = "";
+            const btn = document.getElementById('download-pdf-btn');
+            btn.classList.add('hidden');
+
+            const prompt = `Create a professional HTML resume using Tailwind CSS for ${data.name}. Role: ${data['target-role']}. Info: ${JSON.stringify(data)}. ONLY return HTML code, no markdown. Use a clean, modern layout with a header.`;
+
+            try {
+                let aiResponse = await callBackendAPI(prompt);
+                aiResponse = aiResponse.replace(/```html/g, '').replace(/```/g, '');
+                document.getElementById('resume-output').innerHTML = aiResponse;
+                btn.classList.remove('hidden');
+                btn.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert("Error: " + error.message);
+            } finally {
+                document.getElementById('gen-loader').classList.add('hidden');
+            }
+        }
+
+        function handleDownload() {
+            const element = document.getElementById('resume-output');
+            html2pdf().from(element).save('Professional_Resume.pdf');
+        }
+
+        // --- Backend API Call ---
+        async function callBackendAPI(userPrompt) {
+            const url = 'http://localhost:3000/api/generate';
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: userPrompt })
+            });
+            const json = await response.json();
+            if (json.error) throw new Error(json.error);
+            if (json.result) return json.result;
+            if (json.candidates) return json.candidates[0].content.parts[0].text;
+            throw new Error("No response from AI.");
+        }
+    </script>
+</body>
+</html>
